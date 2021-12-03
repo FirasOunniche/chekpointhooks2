@@ -4,6 +4,8 @@ import Filter from "./Components/Filter/Filter";
 import Movielist from "./Components/MoviesList/Movieslist";
 import NavBar from "./Components/NavBar/NavBar";
 import { data } from "./data.js";
+import Home from "./Components/Home/Home";
+import { Route, Switch } from "react-router-dom";
 
 function App() {
   const [textFilter, setTextFilter] = useState("");
@@ -22,8 +24,21 @@ function App() {
   return (
     <div>
       <NavBar addMovie={addMovie} />
-      <Filter setTextFilter={setTextFilter} setStarsRate={setStarsRate}/>
-      <Movielist movies={movies} textFilter={textFilter} starsRate={starsRate} />
+      <Filter setTextFilter={setTextFilter} setStarsRate={setStarsRate} />
+
+      <Route exact path="/Home" render={() => <Home />} />
+
+      <Route
+        exact
+        path="/list-of-movies"
+        render={() => (
+          <Movielist
+            movies={movies}
+            textFilter={textFilter}
+            starsRate={starsRate}
+          />
+        )}
+      />
     </div>
   );
 }
